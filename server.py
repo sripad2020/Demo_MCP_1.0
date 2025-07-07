@@ -1,12 +1,20 @@
-import socket, asyncio, dns, whois
+import socket
+import asyncio
+from typing import Dict, List, Optional, Any, Union
+import dns
+import whois
 import aiohttp
 from flask import Flask, request, jsonify
-import json, logging, re
+import json
+import logging
+import re
 from bs4 import BeautifulSoup
 from datetime import datetime, UTC
 from urllib.parse import urljoin, urlparse
 import dns.reversename
 import dns.resolver
+from aiohttp import ClientSession
+from flask.wrappers import Response
 
 app = Flask(__name__)
 
@@ -18,9 +26,9 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
-logger = logging.getLogger(__name__)
+logger: logging.Logger = logging.getLogger(__name__)
 
-TOOLS = {
+TOOLS: Dict[str, Dict[str, Any]] = {
     'resolve_target': {
         'description': 'Resolve the target domain to an IP address and perform reverse DNS lookup.',
         'schema': {
@@ -55,10 +63,9 @@ TOOLS = {
     }
 }
 
-
 @app.route('/mcp', methods=['GET', 'POST'])
-def mcp():
-    req = request.get_json()
+def mcp() -> Response:
+    req: Optional[Dict[str, Any]] = request.get_json(silent=True)
     if not req or 'jsonrpc' not in req or 'method' not in req:
         return jsonify({
             'jsonrpc': '2.0',
@@ -66,9 +73,9 @@ def mcp():
             'id': req.get('id') if req else None
         })
 
-    method = req['method']
-    params = req.get('params', {})  # Fixed: was ['params'] instead of 'params'
-    req_id = req.get('id')
+    method: str = req['method']
+    params: Dict[str, Any] = req.get('params', {})
+    req_id: Optional[Any] = req.get('id')
 
     try:
         if method == 'initialize':
@@ -82,8 +89,8 @@ def mcp():
                 'id': req_id
             })
 
-        elif method == 'tools/list':  # Fixed: was 'tool/list'
-            tools = []
+        elif method == 'tools/list':
+            tools: List[Dict[str, Any]] = []
             for tool_name, tool_information in TOOLS.items():
                 tools.append({
                     "name": tool_name,
@@ -92,26 +99,25 @@ def mcp():
                 })
             return jsonify({
                 'jsonrpc': '2.0',
-                'result': {'tools': tools},  # Fixed: was 'results'
+                'result': {'tools': tools},
                 'id': req_id
             })
 
         elif method == 'tools/call':
-            tool_name = params.get('name')
-            args = params.get('arguments', {})
+            tool_name: Optional[str] = params.get('name')
+            args: Dict[str, str] = params.get('arguments', {})
 
             if tool_name == 'resolve_target':
-                target = args.get('target') if isinstance(args, dict) else args
+                target: str = args.get('target') if isinstance(args, dict) else args
                 result = asyncio.run(resolve_target(target))
                 return jsonify({
                     'jsonrpc': '2.0',
                     'result': {'content': [{'type': 'text', 'text': json.dumps(result)}]},
-                    # Fixed: was 'result' instead of 'text'
                     'id': req_id
                 })
 
             elif tool_name == 'scan_whois':
-                domain = args.get('domain') if isinstance(args, dict) else args
+                domain: str = args.get('domain') if isinstance(args, dict) else args
                 result = asyncio.run(scan_whois(domain))
                 return jsonify({
                     'jsonrpc': '2.0',
@@ -120,9 +126,9 @@ def mcp():
                 })
 
             elif tool_name == 'scan_web_vuln':
-                url = args.get('url') if isinstance(args, dict) else args
+                url: str = args.get('url') if isinstance(args, dict) else args
 
-                async def run_scan():
+                async def run_scan() -> Dict[str, Any]:
                     async with aiohttp.ClientSession() as client:
                         parsed_domain = urlparse(url).netloc
                         config = {
@@ -163,9 +169,8 @@ def mcp():
             'id': req_id
         })
 
-
-async def resolve_target(target):
-    result = {
+async def resolve_target(target: str) -> Dict[str, Any]:
+    result: Dict[str, Any] = {
         'target_ip': None,
         'dns_info': {
             'reverse_dns': []
@@ -175,11 +180,10 @@ async def resolve_target(target):
     }
 
     try:
-        # Clean the target (remove http/https if present)
         if target.startswith(('http://', 'https://')):
             target = urlparse(target).netloc
 
-        target_ip = socket.gethostbyname(target)
+        target_ip: str = socket.gethostbyname(target)
         result['target_ip'] = target_ip
 
         try:
@@ -197,10 +201,9 @@ async def resolve_target(target):
 
     return result
 
-
-def make_json_serializable(whois_data):
+def make_json_serializable(whois_data: Any) -> Dict[str, Any]:
     """Convert WHOIS data to a JSON-serializable dictionary."""
-    serializable = {}
+    serializable: Dict[str, Any] = {}
     for key, value in whois_data.items():
         if isinstance(value, datetime):
             serializable[key] = value.isoformat()
@@ -210,15 +213,13 @@ def make_json_serializable(whois_data):
             serializable[key] = str(value)
     return serializable
 
-
-async def scan_whois(domain):
-    result = {
+async def scan_whois(domain: str) -> Dict[str, Any]:
+    result: Dict[str, Any] = {
         'whois_info': {},
         'vulnerabilities': []
     }
 
     try:
-        # Clean the domain (remove http/https if present)
         if domain.startswith(('http://', 'https://')):
             domain = urlparse(domain).netloc
 
@@ -241,22 +242,25 @@ async def scan_whois(domain):
 
     return result
 
-
-async def scan_web_vulnerabilities_extended(base_url, http_client, config, additional_payloads):
-    result = {
+async def scan_web_vulnerabilities_extended(
+    base_url: str,
+    http_client: ClientSession,
+    config: Dict[str, Any],
+    additional_payloads: Dict[str, List[str]]
+) -> Dict[str, Any]:
+    result: Dict[str, Any] = {
         'vulnerabilities': [],
         'security_headers': {},
         'cookies': {}
     }
 
-    urls = {base_url}
-    visited = set()
-    forms = []
-    seen_forms = set()
+    urls: set = {base_url}
+    visited: set = set()
+    forms: List[Dict[str, Any]] = []
+    seen_forms: set = set()
     parsed_url = urlparse(base_url)
 
-    # Common security headers to check
-    SECURITY_HEADERS = [
+    SECURITY_HEADERS: List[str] = [
         'Content-Security-Policy',
         'X-Frame-Options',
         'X-Content-Type-Options',
@@ -267,8 +271,8 @@ async def scan_web_vulnerabilities_extended(base_url, http_client, config, addit
         'Permissions-Policy'
     ]
 
-    async def analyze_headers(response_headers):
-        headers_analysis = {}
+    async def analyze_headers(response_headers: Dict[str, str]) -> Dict[str, Dict[str, Any]]:
+        headers_analysis: Dict[str, Dict[str, Any]] = {}
         for header in SECURITY_HEADERS:
             if header in response_headers:
                 headers_analysis[header] = {
@@ -283,8 +287,8 @@ async def scan_web_vulnerabilities_extended(base_url, http_client, config, addit
                 }
         return headers_analysis
 
-    async def analyze_cookies(cookies):
-        cookie_analysis = {}
+    async def analyze_cookies(cookies: Any) -> Dict[str, Dict[str, Any]]:
+        cookie_analysis: Dict[str, Dict[str, Any]] = {}
         for cookie in cookies:
             cookie_analysis[cookie.name] = {
                 'secure': cookie.secure,
@@ -312,35 +316,31 @@ async def scan_web_vulnerabilities_extended(base_url, http_client, config, addit
                 })
         return cookie_analysis
 
-    async def crawl(url, depth=0):
+    async def crawl(url: str, depth: int = 0) -> None:
         if depth > config.get('max_depth', 2) or url in visited:
             return
         visited.add(url)
         try:
-            # Add custom headers if specified in config
-            headers = config.get('headers', {})
+            headers: Dict[str, str] = config.get('headers', {})
             async with http_client.get(url, headers=headers) as response:
                 if response.status != 200:
                     return
 
-                # Analyze security headers
                 result['security_headers'][url] = await analyze_headers(response.headers)
-
-                # Analyze cookies
                 result['cookies'][url] = await analyze_cookies(response.cookies)
 
-                text = await response.text()
+                text: str = await response.text()
                 soup = BeautifulSoup(text, 'html.parser')
 
                 for form in soup.find_all('form'):
-                    action = form.get('action', '')
-                    form_url = urljoin(url, action)
-                    method = form.get('method', 'get').lower()
-                    form_key = f"{form_url}:{method}"
+                    action: str = form.get('action', '')
+                    form_url: str = urljoin(url, action)
+                    method: str = form.get('method', 'get').lower()
+                    form_key: str = f"{form_url}:{method}"
                     if form_key in seen_forms:
                         continue
                     seen_forms.add(form_key)
-                    inputs = []
+                    inputs: List[Dict[str, str]] = []
                     for inp in form.find_all('input'):
                         if inp.get('name'):
                             inputs.append({
@@ -356,7 +356,7 @@ async def scan_web_vulnerabilities_extended(base_url, http_client, config, addit
                         })
 
                 for a in soup.find_all('a', href=True):
-                    next_url = urljoin(url, a['href'])
+                    next_url: str = urljoin(url, a['href'])
                     if urlparse(next_url).netloc == parsed_url.netloc:
                         urls.add(next_url)
                         await crawl(next_url, depth + 1)
@@ -367,18 +367,16 @@ async def scan_web_vulnerabilities_extended(base_url, http_client, config, addit
 
     for form in forms:
         for input_field in form['inputs']:
-            input_name = input_field['name']
-            input_type = input_field['type']
+            input_name: str = input_field['name']
+            input_type: str = input_field['type']
 
-            # Skip file inputs for XSS/SQLi tests
             if input_type == 'file':
                 continue
 
             for vuln_type, payloads in additional_payloads.items():
                 for payload in payloads:
                     try:
-                        # Include original headers plus any custom ones
-                        headers = form.get('headers', {})
+                        headers: Dict[str, str] = form.get('headers', {})
                         headers.update(config.get('headers', {}))
 
                         if form['method'] == 'post':
@@ -387,7 +385,7 @@ async def scan_web_vulnerabilities_extended(base_url, http_client, config, addit
                                     data={input_name: payload},
                                     headers=headers
                             ) as response:
-                                text = await response.text()
+                                text: str = await response.text()
                                 response_headers = response.headers
                         else:
                             async with http_client.get(
@@ -395,10 +393,9 @@ async def scan_web_vulnerabilities_extended(base_url, http_client, config, addit
                                     params={input_name: payload},
                                     headers=headers
                             ) as response:
-                                text = await response.text()
+                                text: str = await response.text()
                                 response_headers = response.headers
 
-                        # Check for reflected XSS
                         if vuln_type == 'xss' and payload in text:
                             result['vulnerabilities'].append({
                                 'type': 'xss',
@@ -410,7 +407,6 @@ async def scan_web_vulnerabilities_extended(base_url, http_client, config, addit
                                 'response_headers': dict(response_headers)
                             })
 
-                        # Check for SQL injection
                         elif vuln_type == 'sql_injection' and re.search(
                                 r"(sql|mysql|database|syntax|error)", text, re.IGNORECASE):
                             result['vulnerabilities'].append({
@@ -423,7 +419,6 @@ async def scan_web_vulnerabilities_extended(base_url, http_client, config, addit
                                 'response_headers': dict(response_headers)
                             })
 
-                        # Check for command injection
                         elif vuln_type == 'command_injection' and re.search(
                                 r"(root|sh:|bash|cmd|command)", text, re.IGNORECASE):
                             result['vulnerabilities'].append({
