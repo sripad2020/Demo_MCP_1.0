@@ -1,28 +1,27 @@
-import requests,json,os
+import requests
+import json
+import os
 from datetime import datetime
+from typing import Dict, List, Optional, Union, Any
 import nltk
 import string
-import os
-import json
-from datetime import datetime
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
+server_url: str = ''
+session: Optional[requests.Session] = None
+initialized: bool = False
+req_id: int = 1
 
-server_url=''
-session = None
-initialized = False
-req_id = 1
-
-def client(url:str):
+def client(url: str) -> None:
     global server_url, session, initialized, req_id
     server_url = url
     initialized = False
-    session=requests.Session()
+    session = requests.Session()
     req_id = 1
 
-def send_request(method:str, params: dict):
-    global  req_id
+def send_request(method: str, params: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    global req_id
 
     payload = {
         "jsonrpc": "2.0",
@@ -30,22 +29,21 @@ def send_request(method:str, params: dict):
         "params": params or {},
         "id": req_id
     }
-    req_id +=1
+    req_id += 1
 
     try:
-        resp=session.post(url=server_url,json=payload,
-                          headers={'Content-Type':'application/json'},
-                          timeout=10)
+        resp = session.post(url=server_url, json=payload,
+                           headers={'Content-Type': 'application/json'},
+                           timeout=10)
         resp.raise_for_status()
         return resp.json()
     except requests.exceptions.RequestException as req_e:
         print("The Handshake Failed")
         return None
 
-def initialize()->bool:
+def initialize() -> bool:
     global initialized
 
-    # Send initialization request to server
     response = send_request("initialize", {
         "protocolVersion": "2024-11-05",
         "clientInfo": {
@@ -62,7 +60,7 @@ def initialize()->bool:
         print(f"Initialization failed: {response['error']['message']}")
     return False
 
-def list_tools() -> list[dict]:
+def list_tools() -> List[Dict[str, Any]]:
     if not initialized:
         print("Error: Connection not initialized")
         return []
@@ -71,7 +69,8 @@ def list_tools() -> list[dict]:
         "clientInfo": {
             "name": "MCP Python Client",
             "version": "1.0.0"
-        }})
+        }
+    })
 
     if response and 'result' in response:
         return response['result'].get('tools', [])
@@ -79,34 +78,31 @@ def list_tools() -> list[dict]:
         print(f"Error listing tools: {response['error']['message']}")
     return []
 
-def call_tool(tool_name: str, arguments: dict):
+def call_tool(tool_name: str, arguments: Dict[str, str]) -> Optional[Dict[str, Any]]:
     """Call a tool with given arguments"""
     if not initialized:
         print("Error: Connection not initialized")
         return None
 
-    # Send tool call request
     response = send_request("tools/call", {
         "name": tool_name,
         "arguments": arguments
     })
 
-    # Process the response
     if response and 'result' in response:
         return response['result']
     elif response and 'error' in response:
         print(f"Error calling tool: {response['error']['message']}")
     return None
 
-
-def read_readme_descriptions(readme_path="readme (1).md"):
-    descriptions = {}
-    current_tool = None
+def read_readme_descriptions(readme_path: str = "readme (1).md") -> Dict[str, str]:
+    descriptions: Dict[str, str] = {}
+    current_tool: Optional[str] = None
     try:
         with open(readme_path, 'r', encoding='utf-8') as f:
             for line in f:
                 line = line.strip()
-                if line.startswith("###"):  # Assume tool section headers are like ### ToolName
+                if line.startswith("###"):
                     current_tool = line.strip('# ').strip()
                     descriptions[current_tool] = ""
                 elif current_tool:
@@ -118,11 +114,10 @@ def read_readme_descriptions(readme_path="readme (1).md"):
 nltk.download('punkt')
 nltk.download('stopwords')
 
-stop_words = set(stopwords.words('english'))
-punctuation = set(string.punctuation)
+stop_words: set = set(stopwords.words('english'))
+punctuation: set = set(string.punctuation)
 
-
-def preprocess_tool_output(tool_name, result):
+def preprocess_tool_output(tool_name: str, result: Optional[Dict[str, Any]]) -> Dict[str, Any]:
     if not result or 'content' not in result or not result['content']:
         return {
             "tool": tool_name,
@@ -155,8 +150,12 @@ def preprocess_tool_output(tool_name, result):
             "cleaned_text": ""
         }
 
-
-def generate_text_report(knowledge_base, tool_descriptions, output_dir="reports", filename="full_scan_report.txt"):
+def generate_text_report(
+    knowledge_base: Dict[str, Dict[str, Any]],
+    tool_descriptions: Dict[str, str],
+    output_dir: str = "reports",
+    filename: str = "full_scan_report.txt"
+) -> Optional[str]:
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, filename)
 
@@ -171,18 +170,15 @@ def generate_text_report(knowledge_base, tool_descriptions, output_dir="reports"
                 f.write(f"Tool: {tool_name}\n")
                 f.write("-" * 60 + "\n")
 
-                # Tool description from README
                 description = tool_descriptions.get(tool_name, "No detailed explanation available.")
                 f.write(f"Explanation:\n{description}\n\n")
 
-                # Raw output
                 f.write("Output:\n")
                 if isinstance(data['raw_output'], dict):
                     f.write(json.dumps(data['raw_output'], indent=2) + "\n\n")
                 else:
                     f.write(str(data['raw_output']) + "\n\n")
 
-                # Cleaned text and entities
                 f.write("Entities Detected:\n")
                 if data.get('entities'):
                     for ent in data['entities']:
@@ -195,7 +191,8 @@ def generate_text_report(knowledge_base, tool_descriptions, output_dir="reports"
     except Exception as e:
         print(f"Error generating report: {e}")
         return None
-def main():
+
+def main() -> None:
     print("=== MCP Client (Functional Style) ===")
 
     client("http://127.0.0.1:5000/mcp")
@@ -218,7 +215,7 @@ def main():
 
     print(f"\nEthical Reminder: Ensure you have explicit permission to scan {target_url}")
 
-    knowledge_base = {}
+    knowledge_base: Dict[str, Dict[str, Any]] = {}
     tool_descriptions = read_readme_descriptions("README (1).md")
 
     for tool_name, description in tool_names.items():
@@ -231,7 +228,6 @@ def main():
         )
 
         result = call_tool(tool_name, args)
-
         processed_output = preprocess_tool_output(tool_name, result)
         processed_output['description'] = description
         knowledge_base[tool_name] = processed_output
@@ -241,7 +237,6 @@ def main():
         print(f"\nReport generated and saved at: {os.path.abspath(output_path)}")
     else:
         print("\nFailed to generate text report")
-
 
 if __name__ == "__main__":
     main()
