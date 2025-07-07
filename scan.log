@@ -1,0 +1,279 @@
+2025-07-07 13:14:54,835 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 13:14:54,836 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 13:19:08,170 - INFO - 127.0.0.1 - - [07/Jul/2025 13:19:08] "[33mPOST / HTTP/1.1[0m" 404 -
+2025-07-07 13:20:01,542 - INFO - 127.0.0.1 - - [07/Jul/2025 13:20:01] "[33mPOST / HTTP/1.1[0m" 404 -
+2025-07-07 14:38:26,140 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 14:38:26,140 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 14:38:32,983 - INFO - 127.0.0.1 - - [07/Jul/2025 14:38:32] "[33mPOST / HTTP/1.1[0m" 404 -
+2025-07-07 14:42:23,389 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 14:42:23,390 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 14:42:27,808 - INFO - 127.0.0.1 - - [07/Jul/2025 14:42:27] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 14:52:07,487 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 14:52:07,487 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 14:52:07,506 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 14:52:08,171 - WARNING -  * Debugger is active!
+2025-07-07 14:52:08,174 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 14:52:10,893 - INFO - 127.0.0.1 - - [07/Jul/2025 14:52:10] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 14:53:16,523 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:53:16,523 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:53:16,840 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 14:53:17,542 - WARNING -  * Debugger is active!
+2025-07-07 14:53:17,545 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 14:56:16,401 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:56:16,402 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:56:16,872 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 14:56:17,646 - WARNING -  * Debugger is active!
+2025-07-07 14:56:17,648 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 14:56:21,350 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:56:21,352 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:56:21,813 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 14:56:22,505 - WARNING -  * Debugger is active!
+2025-07-07 14:56:22,507 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 14:56:37,584 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 14:56:37,584 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 14:56:37,592 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 14:56:38,284 - WARNING -  * Debugger is active!
+2025-07-07 14:56:38,286 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 14:56:42,087 - INFO - 127.0.0.1 - - [07/Jul/2025 14:56:42] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 14:56:42,101 - INFO - 127.0.0.1 - - [07/Jul/2025 14:56:42] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 14:57:11,339 - WARNING - Reverse DNS lookup failed: The DNS query name does not exist: 57.113.44.49.in-addr.arpa.
+2025-07-07 14:57:11,340 - INFO - 127.0.0.1 - - [07/Jul/2025 14:57:11] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 14:57:16,087 - WARNING - WHOIS lookup failed for www.example.com: can't compare offset-naive and offset-aware datetimes
+2025-07-07 14:57:16,088 - INFO - 127.0.0.1 - - [07/Jul/2025 14:57:16] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 14:57:16,743 - INFO - 127.0.0.1 - - [07/Jul/2025 14:57:16] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 14:58:15,832 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:58:15,832 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:58:16,132 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 14:58:16,857 - WARNING -  * Debugger is active!
+2025-07-07 14:58:16,860 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 14:58:36,423 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 14:58:36,423 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 14:58:36,431 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 14:58:37,124 - WARNING -  * Debugger is active!
+2025-07-07 14:58:37,126 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 14:58:45,964 - INFO - 127.0.0.1 - - [07/Jul/2025 14:58:45] "[33mPOST / HTTP/1.1[0m" 404 -
+2025-07-07 14:59:05,559 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:59:05,560 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 14:59:06,512 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 14:59:20,219 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 14:59:20,219 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 14:59:20,227 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 14:59:20,954 - WARNING -  * Debugger is active!
+2025-07-07 14:59:20,957 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 14:59:28,687 - INFO - 127.0.0.1 - - [07/Jul/2025 14:59:28] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:00:16,236 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:00:16,237 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:00:16,456 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:00:17,152 - WARNING -  * Debugger is active!
+2025-07-07 15:00:17,154 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:01:24,295 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:01:24,297 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:01:24,298 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:01:24,783 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:01:25,536 - WARNING -  * Debugger is active!
+2025-07-07 15:01:25,539 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:01:37,567 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 15:01:37,567 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 15:01:37,575 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:01:38,266 - WARNING -  * Debugger is active!
+2025-07-07 15:01:38,269 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:01:42,807 - INFO - 127.0.0.1 - - [07/Jul/2025 15:01:42] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:02:18,894 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:02:18,894 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:02:18,895 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:02:19,669 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:02:20,368 - WARNING -  * Debugger is active!
+2025-07-07 15:02:20,370 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:02:34,348 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 15:02:34,348 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 15:02:34,357 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:02:35,041 - WARNING -  * Debugger is active!
+2025-07-07 15:02:35,044 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:02:38,520 - INFO - 127.0.0.1 - - [07/Jul/2025 15:02:38] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:03:56,971 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:03:56,972 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:03:57,741 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:03:58,524 - WARNING -  * Debugger is active!
+2025-07-07 15:03:58,526 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:04:03,943 - INFO - 127.0.0.1 - - [07/Jul/2025 15:04:03] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:04:16,312 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:04:16,313 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:04:16,811 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:04:17,543 - WARNING -  * Debugger is active!
+2025-07-07 15:04:17,545 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:04:21,425 - INFO - 127.0.0.1 - - [07/Jul/2025 15:04:21] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:04:28,122 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:04:28,124 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:04:28,824 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:04:29,509 - WARNING -  * Debugger is active!
+2025-07-07 15:04:29,511 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:04:30,541 - INFO - 127.0.0.1 - - [07/Jul/2025 15:04:30] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:05:46,548 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:05:46,549 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:05:47,178 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:05:47,893 - WARNING -  * Debugger is active!
+2025-07-07 15:05:47,895 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:06:06,170 - INFO - 127.0.0.1 - - [07/Jul/2025 15:06:06] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:06:15,751 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\google\\cloud\\aiplatform_v1beta1\\types\\notebook_execution_job.py', reloading
+2025-07-07 15:06:15,841 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\openai\\types\\beta\\vector_store.py', reloading
+2025-07-07 15:06:15,859 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\openai\\types\\beta\\threads\\message.py', reloading
+2025-07-07 15:06:15,886 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\openai\\types\\beta\\threads\\run.py', reloading
+2025-07-07 15:06:15,901 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\openai\\types\\beta\\threads\\runs\\run_step.py', reloading
+2025-07-07 15:06:15,915 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\openai\\types\\beta\\realtime\\conversation_item_param.py', reloading
+2025-07-07 15:06:15,929 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\openai\\types\\beta\\realtime\\conversation_item.py', reloading
+2025-07-07 15:06:15,941 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\openai\\types\\beta\\vector_stores\\vector_store_file_batch.py', reloading
+2025-07-07 15:06:15,954 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\openai\\types\\beta\\vector_stores\\vector_store_file.py', reloading
+2025-07-07 15:06:15,981 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\aiohttp\\web_protocol.py', reloading
+2025-07-07 15:06:16,014 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\alembic\\ddl\\_autogen.py', reloading
+2025-07-07 15:06:16,062 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\gunicorn\\workers\\ggevent.py', reloading
+2025-07-07 15:06:16,266 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:06:17,154 - WARNING -  * Debugger is active!
+2025-07-07 15:06:17,156 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:06:17,479 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\databricks\\sdk\\service\\oauth2.py', reloading
+2025-07-07 15:06:17,678 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\mlflow\\store\\tracking\\dbmodels\\models.py', reloading
+2025-07-07 15:06:17,696 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\mlflow\\store\\tracking\\dbmodels\\initial_models.py', reloading
+2025-07-07 15:06:17,709 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\mlflow\\store\\model_registry\\dbmodels\\models.py', reloading
+2025-07-07 15:06:17,734 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\mlflow\\gateway\\app.py', reloading
+2025-07-07 15:06:17,749 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\mlflow\\entities\\trace_info.py', reloading
+2025-07-07 15:06:18,309 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:06:18,973 - WARNING -  * Debugger is active!
+2025-07-07 15:06:18,975 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:08:10,064 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:08:10,065 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:08:10,829 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:08:11,516 - WARNING -  * Debugger is active!
+2025-07-07 15:08:11,519 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:08:24,891 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:08:24,893 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:08:24,894 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:08:25,736 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:08:26,443 - WARNING -  * Debugger is active!
+2025-07-07 15:08:26,445 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:08:28,489 - INFO - 127.0.0.1 - - [07/Jul/2025 15:08:28] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:08:28,506 - INFO - 127.0.0.1 - - [07/Jul/2025 15:08:28] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:08:39,510 - INFO - 127.0.0.1 - - [07/Jul/2025 15:08:39] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:08:39,534 - WARNING - WHOIS lookup failed for None: 'NoneType' object has no attribute 'startswith'
+2025-07-07 15:08:39,534 - INFO - 127.0.0.1 - - [07/Jul/2025 15:08:39] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:08:39,538 - WARNING - Crawling failed for None: Constructor parameter should be str
+2025-07-07 15:08:39,539 - INFO - 127.0.0.1 - - [07/Jul/2025 15:08:39] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:09:14,612 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:09:14,614 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:09:14,616 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:09:14,931 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:09:16,619 - WARNING -  * Debugger is active!
+2025-07-07 15:09:16,623 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:09:40,629 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:09:40,630 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 15:09:40,917 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:09:41,702 - WARNING -  * Debugger is active!
+2025-07-07 15:09:41,704 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:09:50,623 - INFO - 127.0.0.1 - - [07/Jul/2025 15:09:50] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:09:50,647 - INFO - 127.0.0.1 - - [07/Jul/2025 15:09:50] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:09:58,379 - INFO - 127.0.0.1 - - [07/Jul/2025 15:09:58] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:10:01,551 - WARNING - WHOIS lookup failed for www.google.com: can't compare offset-naive and offset-aware datetimes
+2025-07-07 15:10:01,552 - INFO - 127.0.0.1 - - [07/Jul/2025 15:10:01] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:12:54,007 - INFO - 127.0.0.1 - - [07/Jul/2025 15:12:54] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:12:59,940 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\server.py', reloading
+2025-07-07 15:12:59,941 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\server.py', reloading
+2025-07-07 15:13:00,324 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 15:13:01,007 - WARNING -  * Debugger is active!
+2025-07-07 15:13:01,009 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 15:13:03,762 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:03] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:13:03,767 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:03] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:13:14,209 - WARNING - Reverse DNS lookup failed: The DNS query name does not exist: 234.28.18.104.in-addr.arpa.
+2025-07-07 15:13:14,210 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:14] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:13:16,482 - WARNING - WHOIS lookup failed for www.grok.com: can't compare offset-naive and offset-aware datetimes
+2025-07-07 15:13:16,482 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:16] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:13:17,441 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:17] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:13:22,253 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:22] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:13:22,278 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:22] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:13:32,815 - WARNING - Reverse DNS lookup failed: The DNS query name does not exist: 21.21.76.76.in-addr.arpa.
+2025-07-07 15:13:32,816 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:32] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:13:35,548 - WARNING - WHOIS lookup failed for www.technomers.com: can't compare offset-naive and offset-aware datetimes
+2025-07-07 15:13:35,549 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:35] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 15:13:43,528 - INFO - 127.0.0.1 - - [07/Jul/2025 15:13:43] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 20:32:51,686 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 20:32:51,687 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 20:32:51,734 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 20:32:52,403 - WARNING -  * Debugger is active!
+2025-07-07 20:32:52,406 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 20:44:55,379 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 20:44:55,381 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 20:44:56,493 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 20:44:57,365 - WARNING -  * Debugger is active!
+2025-07-07 20:44:57,367 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 20:45:11,816 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 20:45:11,819 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 20:45:12,600 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 20:45:13,450 - WARNING -  * Debugger is active!
+2025-07-07 20:45:13,452 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 20:51:55,137 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 20:51:55,138 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 20:51:55,569 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 20:51:56,300 - WARNING -  * Debugger is active!
+2025-07-07 20:51:56,302 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 20:52:09,204 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 20:52:09,209 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 20:52:09,511 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 20:52:10,226 - WARNING -  * Debugger is active!
+2025-07-07 20:52:10,229 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 20:52:14,617 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\spacy\\__init__.py', reloading
+2025-07-07 20:52:14,643 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\spacy\\errors.py', reloading
+2025-07-07 20:52:14,657 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\spacy\\compat.py', reloading
+2025-07-07 20:52:14,659 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\thinc\\__init__.py', reloading
+2025-07-07 20:52:14,661 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\thinc\\config.py', reloading
+2025-07-07 20:52:14,673 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\thinc\\types.py', reloading
+2025-07-07 20:52:14,690 - INFO -  * Detected change in 'F:\\3.12.5\\Lib\\site-packages\\thinc\\compat.py', reloading
+2025-07-07 20:52:14,714 - INFO -  * Detected change in 'C:\\Users\\sripa\\AppData\\Roaming\\Python\\Python312\\site-packages\\torch\\__init__.py', reloading
+2025-07-07 20:52:15,374 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 20:52:16,073 - WARNING -  * Debugger is active!
+2025-07-07 20:52:16,075 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 20:52:41,681 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 20:52:41,682 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 20:52:41,694 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 20:52:42,437 - WARNING -  * Debugger is active!
+2025-07-07 20:52:42,439 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 21:01:27,102 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-07 21:01:27,103 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-07 21:01:27,110 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 21:01:27,784 - WARNING -  * Debugger is active!
+2025-07-07 21:01:27,786 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 21:02:05,527 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 21:02:05,528 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 21:02:06,168 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 21:02:06,897 - WARNING -  * Debugger is active!
+2025-07-07 21:02:06,899 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 21:02:15,556 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 21:02:15,559 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 21:02:16,080 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 21:02:16,792 - WARNING -  * Debugger is active!
+2025-07-07 21:02:16,794 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 21:02:56,758 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 21:02:56,759 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 21:02:57,183 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 21:02:57,931 - WARNING -  * Debugger is active!
+2025-07-07 21:02:57,933 - INFO -  * Debugger PIN: 314-267-561
+2025-07-07 21:03:24,989 - INFO - 127.0.0.1 - - [07/Jul/2025 21:03:24] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 21:03:25,007 - INFO - 127.0.0.1 - - [07/Jul/2025 21:03:25] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 21:03:37,755 - INFO - 127.0.0.1 - - [07/Jul/2025 21:03:37] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 21:03:41,436 - WARNING - WHOIS lookup failed for www.google.com: can't compare offset-naive and offset-aware datetimes
+2025-07-07 21:03:41,437 - INFO - 127.0.0.1 - - [07/Jul/2025 21:03:41] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 21:03:41,947 - WARNING - Crawling failed for https://www.google.com/: 'str' object has no attribute 'secure'
+2025-07-07 21:03:41,949 - INFO - 127.0.0.1 - - [07/Jul/2025 21:03:41] "POST /mcp HTTP/1.1" 200 -
+2025-07-07 21:04:32,625 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 21:04:32,627 - INFO -  * Detected change in 'C:\\Users\\sripa\\OneDrive\\Desktop\\MCp_serVers\\test_client.py', reloading
+2025-07-07 21:04:32,770 - INFO -  * Restarting with watchdog (windowsapi)
+2025-07-07 21:04:33,539 - WARNING -  * Debugger is active!
+2025-07-07 21:04:33,541 - INFO -  * Debugger PIN: 314-267-561
