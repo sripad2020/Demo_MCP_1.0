@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, UTC
 from urllib.parse import urljoin, urlparse
 import dns.reversename
+from typing import Callable, Tuple
 import dns.resolver
 from aiohttp import ClientSession
 from flask.wrappers import Response
@@ -63,6 +64,34 @@ TOOLS: Dict[str, Dict[str, Any]] = {
     }
 }
 
+async def handle_resolve_target(args: Dict[str, str]) -> Dict[str, Any]:
+    target: str = args.get('target') if isinstance(args, dict) else args
+    return await resolve_target(target)
+
+async def handle_scan_whois(args: Dict[str, str]) -> Dict[str, Any]:
+    domain: str = args.get('domain') if isinstance(args, dict) else args
+    return await scan_whois(domain)
+
+async def handle_scan_web_vuln(args: Dict[str, str]) -> Dict[str, Any]:
+    url: str = args.get('url') if isinstance(args, dict) else args
+    async with aiohttp.ClientSession() as client:
+        parsed_domain:str = urlparse(url).netloc
+        config = {
+            "max_depth": 2,
+            "rate_limit_delay": 1.0
+        }
+        payloads = {
+            "xss": ["<script>alert(1)</script>"],
+            "sql_injection": ["' OR '1'='1", "' UNION SELECT NULL --"]
+        }
+        return await scan_web_vulnerabilities_extended(url, client, config, payloads)
+
+TOOL_HANDLERS: Dict[str, Callable[[Dict[str, str]], Any]] = {
+    'resolve_target': handle_resolve_target,
+    'scan_whois': handle_scan_whois,
+    'scan_web_vuln': handle_scan_web_vuln
+}
+
 @app.route('/mcp', methods=['GET', 'POST'])
 def mcp() -> Response:
     req: Optional[Dict[str, Any]] = request.get_json(silent=True)
@@ -70,7 +99,7 @@ def mcp() -> Response:
         return jsonify({
             'jsonrpc': '2.0',
             'error': {'code': -32600, 'message': 'Invalid Request'},
-            'id': req.get('id') if req else None
+            'id': req.get('id')
         })
 
     method: str = req['method']
@@ -107,54 +136,20 @@ def mcp() -> Response:
             tool_name: Optional[str] = params.get('name')
             args: Dict[str, str] = params.get('arguments', {})
 
-            if tool_name == 'resolve_target':
-                target: str = args.get('target') if isinstance(args, dict) else args
-                result = asyncio.run(resolve_target(target))
+            handler = TOOL_HANDLERS.get(tool_name)
+            if handler:
+                result = asyncio.run(handler(args))
                 return jsonify({
                     'jsonrpc': '2.0',
                     'result': {'content': [{'type': 'text', 'text': json.dumps(result)}]},
                     'id': req_id
                 })
-
-            elif tool_name == 'scan_whois':
-                domain: str = args.get('domain') if isinstance(args, dict) else args
-                result = asyncio.run(scan_whois(domain))
-                return jsonify({
-                    'jsonrpc': '2.0',
-                    'result': {'content': [{'type': 'text', 'text': json.dumps(result)}]},
-                    'id': req_id
-                })
-
-            elif tool_name == 'scan_web_vuln':
-                url: str = args.get('url') if isinstance(args, dict) else args
-
-                async def run_scan() -> Dict[str, Any]:
-                    async with aiohttp.ClientSession() as client:
-                        parsed_domain = urlparse(url).netloc
-                        config = {
-                            "max_depth": 2,
-                            "rate_limit_delay": 1.0
-                        }
-                        payloads = {
-                            "xss": ["<script>alert(1)</script>"],
-                            "sql_injection": ["' OR '1'='1", "' UNION SELECT NULL --"]
-                        }
-                        return await scan_web_vulnerabilities_extended(url, client, config, payloads)
-
-                result = asyncio.run(run_scan())
-                return jsonify({
-                    'jsonrpc': '2.0',
-                    'result': {'content': [{'type': 'text', 'text': json.dumps(result)}]},
-                    'id': req_id
-                })
-
             else:
                 return jsonify({
                     'jsonrpc': '2.0',
                     'error': {'code': -32601, 'message': f'Tool {tool_name} not found'},
                     'id': req_id
                 })
-
         else:
             return jsonify({
                 'jsonrpc': '2.0',
@@ -271,6 +266,42 @@ async def scan_web_vulnerabilities_extended(
         'Permissions-Policy'
     ]
 
+    VULN_CHECKERS: Dict[str, Dict[str, Any]] = {
+        'xss': {
+            'condition': lambda text, payload: payload in text,
+            'details': lambda form, input_name, payload: {
+                'type': 'xss',
+                'details': f"Reflected XSS at {form['url']} with input {input_name}",
+                'severity': 'high',
+                'cvss_score': 7.5,
+                'mitigation': "Sanitize inputs and use CSP.",
+                'payload': payload
+            }
+        },
+        'sql_injection': {
+            'condition': lambda text, payload: re.search(r"(sql|mysql|database|syntax|error)", text, re.IGNORECASE) is not None,
+            'details': lambda form, input_name, payload: {
+                'type': 'sql_injection',
+                'details': f"Potential SQLi at {form['url']} with input {input_name}",
+                'severity': 'critical',
+                'cvss_score': 9.8,
+                'mitigation': "Use parameterized queries and validate input.",
+                'payload': payload
+            }
+        },
+        'command_injection': {
+            'condition': lambda text, payload: re.search(r"(root|sh:|bash|cmd|command)", text, re.IGNORECASE) is not None,
+            'details': lambda form, input_name, payload: {
+                'type': 'command_injection',
+                'details': f"Potential command injection at {form['url']} with input {input_name}",
+                'severity': 'critical',
+                'cvss_score': 9.1,
+                'mitigation': "Validate and sanitize all user inputs.",
+                'payload': payload
+            }
+        }
+    }
+
     async def analyze_headers(response_headers: Dict[str, str]) -> Dict[str, Dict[str, Any]]:
         headers_analysis: Dict[str, Dict[str, Any]] = {}
         for header in SECURITY_HEADERS:
@@ -363,80 +394,48 @@ async def scan_web_vulnerabilities_extended(
         except Exception as e:
             logger.warning(f"Crawling failed for {url}: {str(e)}")
 
+    async def test_vulnerability(
+        form: Dict[str, Any],
+        input_field: Dict[str, str],
+        vuln_type: str,
+        payload: str
+    ) -> None:
+        try:
+            headers: Dict[str, str] = form.get('headers', {})
+            headers.update(config.get('headers', {}))
+
+            async with http_client.request(
+                method=form['method'],
+                url=form['url'],
+                data={input_field['name']: payload} if form['method'] == 'post' else None,
+                params={input_field['name']: payload} if form['method'] != 'post' else None,
+                headers=headers
+            ) as response:
+                text: str = await response.text()
+                response_headers = response.headers
+
+            checker = VULN_CHECKERS.get(vuln_type)
+            if checker and checker['condition'](text, payload):
+                vulnerability = checker['details'](form, input_field['name'], payload)
+                vulnerability['response_headers'] = dict(response_headers)
+                result['vulnerabilities'].append(vulnerability)
+
+            await asyncio.sleep(config.get('rate_limit_delay', 0.5))
+        except Exception as e:
+            logger.warning(f"Vulnerability test failed: {str(e)}")
+
     await crawl(base_url)
 
-    for form in forms:
-        for input_field in form['inputs']:
-            input_name: str = input_field['name']
-            input_type: str = input_field['type']
-
-            if input_type == 'file':
-                continue
-
-            for vuln_type, payloads in additional_payloads.items():
-                for payload in payloads:
-                    try:
-                        headers: Dict[str, str] = form.get('headers', {})
-                        headers.update(config.get('headers', {}))
-
-                        if form['method'] == 'post':
-                            async with http_client.post(
-                                    form['url'],
-                                    data={input_name: payload},
-                                    headers=headers
-                            ) as response:
-                                text: str = await response.text()
-                                response_headers = response.headers
-                        else:
-                            async with http_client.get(
-                                    form['url'],
-                                    params={input_name: payload},
-                                    headers=headers
-                            ) as response:
-                                text: str = await response.text()
-                                response_headers = response.headers
-
-                        if vuln_type == 'xss' and payload in text:
-                            result['vulnerabilities'].append({
-                                'type': 'xss',
-                                'details': f"Reflected XSS at {form['url']} with input {input_name}",
-                                'severity': 'high',
-                                'cvss_score': 7.5,
-                                'mitigation': "Sanitize inputs and use CSP.",
-                                'payload': payload,
-                                'response_headers': dict(response_headers)
-                            })
-
-                        elif vuln_type == 'sql_injection' and re.search(
-                                r"(sql|mysql|database|syntax|error)", text, re.IGNORECASE):
-                            result['vulnerabilities'].append({
-                                'type': 'sql_injection',
-                                'details': f"Potential SQLi at {form['url']} with input {input_name}",
-                                'severity': 'critical',
-                                'cvss_score': 9.8,
-                                'mitigation': "Use parameterized queries and validate input.",
-                                'payload': payload,
-                                'response_headers': dict(response_headers)
-                            })
-
-                        elif vuln_type == 'command_injection' and re.search(
-                                r"(root|sh:|bash|cmd|command)", text, re.IGNORECASE):
-                            result['vulnerabilities'].append({
-                                'type': 'command_injection',
-                                'details': f"Potential command injection at {form['url']} with input {input_name}",
-                                'severity': 'critical',
-                                'cvss_score': 9.1,
-                                'mitigation': "Validate and sanitize all user inputs.",
-                                'payload': payload,
-                                'response_headers': dict(response_headers)
-                            })
-
-                        await asyncio.sleep(config.get('rate_limit_delay', 0.5))
-
-                    except Exception as e:
-                        logger.warning(f"Vulnerability test failed: {str(e)}")
+    tasks: List[Tuple[Dict[str, Any], Dict[str, str], str, str]] = [
+        (form, input_field, vuln_type, payload)
+        for form in forms
+        for input_field in form['inputs']
+        if input_field['type'] != 'file'
+        for vuln_type, payloads in additional_payloads.items()
+        for payload in payloads
+    ]
+    await asyncio.gather(*(test_vulnerability(form, input_field, vuln_type, payload) for form, input_field, vuln_type, payload in tasks))
 
     return result
-
 if __name__ == '__main__':
     app.run(debug=True)
